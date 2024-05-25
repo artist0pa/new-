@@ -1,5 +1,5 @@
 console.log("HELLO WORLD")
 //new line adde
-funtion(){
+function a(){
     console.log("hello ")
 }
