@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from 'react'
 
+
 type HeaderComp={
     Product : string,
     Princing: string,
     Resources : string 
 }
+type prop={
+    bgcolor1:(text:boolean)=>void
+}
 
-const Header =()=>{
+const Header:React.FC<prop>=({bgcolor1})=>{
     const HeaderMenu:HeaderComp={
         Product:"Product",
-        Princing:"Princing",
+        Princing:"Princing",    
         Resources:"Resources"
     }
     const [scrollpos,setscrollpos]=useState<number>(0)
     const [Headerbg, setHeadetbg]=useState<string>('text-white')
     const [bgColor,setbgColor]=useState<string>('bg-white')
+    const [color,setcolor]=useState(false)
+        
+    const sethover=()=>{
+            setHeadetbg("text-[#0a1f21]");
+                setbgColor('bg-custombg')
+                bgcolor1(true)
+    }
+       
+   
 
     useEffect(()=>{
         const handlescroll = ()=>{
@@ -24,7 +37,7 @@ const Header =()=>{
                 setbgColor('bg-custombg')
             }
             else
-            {
+            {    
                 setHeadetbg("text-white");
                 setbgColor('bg-white')
             }
@@ -33,27 +46,27 @@ const Header =()=>{
             
         }
 
+
+
         window.addEventListener('scroll',handlescroll)
         return () => window.removeEventListener("scroll", handlescroll);
     },[scrollpos])
-    
-        
-    
-
     return (
-            <div className={` flex justify-between    sticky top-0  `}>
-            <div>
-            <ul  className=' flex gap-5 items-center '> 
+
+        <div>
+            <div   className={` flex justify-between sticky top-0  `}>
+            <div className=''>
+            <ul  onMouseEnter={sethover}   className='    flex gap-5 items-center '> 
                  <li className={`text-[20px] ${Headerbg} transition-colors duration-300 ease-in-out  font-semibold`}>
                    Angelist
                  </li>
-                <li className={`${Headerbg} transition-colors duration-300 ease-in-out font-semibold`}>
+                <li     className={`${Headerbg} transition-colors duration-300 ease-in-out font-semibold`}>
                     {HeaderMenu.Product}
                 </li>
-                <li className={`${Headerbg} transition-colors duration-300 ease-in-out font-semibold`}>
+                <li  className={`${Headerbg} transition-colors duration-300 ease-in-out font-semibold`}>
                     {HeaderMenu.Princing}
                 </li>
-                <li className={`${Headerbg} transition-colors duration-300 ease-in-out font-semibold`}>
+                <li  className={`${Headerbg} transition-colors duration-300 ease-in-out font-semibold`}>
                     {HeaderMenu.Resources}
                 </li>
             </ul>
@@ -65,6 +78,8 @@ const Header =()=>{
 
             </div>
                 </div>
+               
+                </div>     
     )
 }
 
