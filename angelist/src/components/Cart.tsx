@@ -23,8 +23,8 @@ const Cart:React.FC<Obj>=({title,image,description})=> {
         onMouseEnter={enter}
         onMouseLeave={leave}
          className=  { ` h-[300px] ${scale} 
-          transition-all duration-500 ease-in-out
-           object-cover w-[500px] `} src={image}/></div>
+          transition-all z-[-10] duration-500 ease-in-out
+          object-cover  w-[500px] `} src={image}/></div>
         <p className='text-white  mt-5'>{description}</p>
     </div>
     
