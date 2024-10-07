@@ -90,7 +90,7 @@ const Header:React.FC=()=>{
     },[scrollpos,menu1,menu2,menu3])
     return (
 
-        <div className={`py-4 px-10  z-50  ${Headerbg12}   transition-colors duration-300 ease-in-out sticky   top-0 `}>
+        <div className={`py-4 px-10   z-50  ${Headerbg12} shutter-animation  transition-colors duration-300 ease-in-out sticky   top-0 `}>
             <div   className={` flex justify-between sticky top-0  `}>
             <div className=''>
             <ul     className='flex gap-5 z-0 items-center '> 
@@ -115,8 +115,11 @@ const Header:React.FC=()=>{
                 <button  className={` py-3 ${Headerbg==='text-[#0a1f21]'?'text-white':'text-[#0a1f21]'} font-semibold transition-colors duration-300 ease-in-out  px-4 rounded-md ${bgColor} `}>Get started</button>
 
             </div>
+
+
+            
                 </div >
-                <div onMouseLeave={onMouseleave}   className={`${menu1||menu2||menu3?null:'hidden z-10'} `}>
+                <div onMouseLeave={onMouseleave}   className={`${menu1||menu2||menu3?null:'hidden z-10'} h-[350px]  `}>
                 <hr className='top-[82px] left-0 absolute w-full'></hr>
                 <Slide
                  activeMenu1={menu1}
