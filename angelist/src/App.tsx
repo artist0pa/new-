@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import './App.css'
 import Header from './components/Header'
-import { ArrowRightIcon } from '@heroicons/react/solid';
+import { ArrowRightIcon,ArrowLeftIcon } from '@heroicons/react/solid';
 import Hero from './components/Hero'
 import Cart from './components/Cart'
 import image3 from './data/d5091cb3d439108fdd22a7b7f4575b4d70a29b1e-2400x1200.webp'
@@ -9,16 +9,46 @@ import Cartarrobj from './data/Cart'
 import Slide from './components/Slide'
 import  imge1 from './data/download (1).jpeg'
 import imge2 from './data/full-service.webp'
+import img3 from './data/pexels-george-milton-7014944.jpg'
+import img4 from './data/pexels-lum3n-44775-322207.jpg'
 import video from './data/uhd_25fps.mp4'
+import Footer from './components/Footer';
+
+type obj ={
+    imglink:string,
+    title: string,
+    description : string
+}
+const cartres:obj[]=[
+  {
+    imglink:img3,
+    title:'case Studies',
+    description:'How wenk Elevats LP Onboarding with investore management suite'
+  },
+  {
+    imglink:img3,
+    title:'case Studies',
+    description:'The Emerging Managers Guid How to plan your Fund l'
+  },
+  {
+    imglink:img4,
+    title:'case Studies',
+    description:'Getting investor onboarding Right'
+  },
+  {
+    imglink:img4,
+    title:'case Studies',
+    description:'Q2 Releases & Product Updates'
+  }
+]
 function App() {
   const [scrollpos,setscrollpos]=useState<number>(0)
   
   const [Headerbg, setHeadetbg]=useState<string>('bg-custombg')
   const [scroler2, setscroler2]=useState<string>('bg-white')
-  const [bgcolor,setbgColor]=useState<boolean>(false)
-
- 
-  
+  const [im,setim]=useState<boolean>(false)
+  const [scroll3,setscroll3]=useState<boolean>(false)
+  const pageHight = document.documentElement.scrollHeight
   useEffect(()=>{
     const handlescroll = ()=>{
         const currentscroll = window.pageYOffset;
@@ -35,21 +65,25 @@ function App() {
         else{
           setscroler2('bg-white')
         }
-
-        setscrollpos(currentscroll)
+        if(currentscroll>=pageHight-1 )
+          setscroll3(true)
+        else{
+          setscroll3(false)
+        }
         
     }
 
     window.addEventListener('scroll',handlescroll)
     return () => window.removeEventListener("scroll", handlescroll);
-},[scrollpos])
+},[scrollpos,pageHight])
 {/* <div className={` py-4 ${Headerbg} ${bgcolor?'bg-white':'bg-transparent'}  transition-colors duration-300 ease-in-out sticky   top-0 `}> */}
 
   
 
   return (
-    <div className={ `relative ${Headerbg}  transition-all ease-in-out  duration-500            `  }>
-    <div  className='sticky z-50   top-0'>
+    <div className={ `relative ${Headerbg}  transition-all ease-in-out  duration-500`  }>
+      <div className='  '>
+    <div  className={`sticky z-10 ${scroll3?'absolute':''}   top-0`}>
     <Header />
       </div>
 
@@ -166,15 +200,48 @@ AngelList’s full service offerings provides access to 50+ services that remove
                 </div>    
         </div>
       </div>
+      <div className=' relative bg-green-200'>
+      <img src={`${im?`${img3}`:`${img4}`}`} className='h-[400px] w-full object-cover  '/> 
+        <div className='absolute w-[50px] bottom-3 left-20 flex gap-2'><ArrowLeftIcon onClick={()=>setim(false)}  className='text-white'/><ArrowRightIcon onClick={()=>setim(true)}  className='text-white'/></div>
+        </div>
 
 
 
+        <div className='px-10  '>
+            <p className='  mt-20 text-[30px]  leading-3 text-custombg'>Resources</p>
+            <p className='text-[80px]  text-custombg  '>
+              Latest 
+            </p>
+            <p className='text-[80px] leading-10  text-custombg'>
+            articals 
+            </p>
+        </div>
 
+        <div className='flex px-10 gap-3 mb-20  mt-14'>
+          {
+            cartres.map((e,i)=>(
+              <div
+                  key={e.title+i}
+                  className='w-[300px]  '
+              >
+                                 <div className=''>
+             <img className='w-[300px] h-[200px] mb-1 object-cover' src={`${e.imglink}`}  />
+              <p className='bg-slate-200 p-1 rounded-md inline-block'>{e.title}</p>
+              <p>{e.description}</p>
+                                </div>
+              </div>
+            ))
+          }
+        </div>
 
+            </div>
 
-
-
-    </div>
+        <div className={ ` ${scroll3 ? "":''}   `}>
+          <Footer/>
+        </div>
+       
+        
+      </div> 
   )
 }
 
