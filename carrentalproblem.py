@@ -8,7 +8,7 @@ class Car:
             self.model =model 
             self.year=year 
             self.licenceplate=licenceplate
-            self.rental_rate=rental_rate
+            self.rental_rate= rental_rate
 
     def cardetails (self):
             return (f"{self.make} {self.model} {self.year} {self.licenceplate}{self.rental_rate}")
