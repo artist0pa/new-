@@ -1,8 +1,5 @@
 # Solution: Create a ConfigurationManager class as a singleton that reads settings from a configuration file. Any part of the application can access this instance to get configuration values.
 
-
-
-
 import json
 
 class Config1:
