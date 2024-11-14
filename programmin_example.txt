@@ -1,0 +1,381 @@
+1. Design Patterns
+Example: Factory Method Pattern
+Java:
+
+java
+// Step 1: Define an interface
+interface Car {
+    void drive();
+}
+
+// Step 2: Implement concrete classes
+class Tesla implements Car {
+    public void drive() {
+        System.out.println("Driving a Tesla!");
+    }
+}
+
+class Toyota implements Car {
+    public void drive() {
+        System.out.println("Driving a Toyota!");
+    }
+}
+
+// Step 3: Create a factory to generate objects
+class CarFactory {
+    public static Car createCar(String type) {
+        switch (type) {
+            case "Tesla":
+                return new Tesla();
+            case "Toyota":
+                return new Toyota();
+            default:
+                throw new IllegalArgumentException("Unknown car type");
+        }
+    }
+}
+
+// Step 4: Use the factory
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = CarFactory.createCar("Tesla");
+        myCar.drive(); // Output: Driving a Tesla!
+    }
+}
+TypeScript:
+
+typescript
+Copy code
+// Step 1: Define an interface
+interface Car {
+    drive(): void;
+}
+
+// Step 2: Implement concrete classes
+class Tesla implements Car {
+    drive() {
+        console.log("Driving a Tesla!");
+    }
+}
+
+class Toyota implements Car {
+    drive() {
+        console.log("Driving a Toyota!");
+    }
+}
+
+// Step 3: Create a factory to generate objects
+class CarFactory {
+    static createCar(type: string): Car {
+        switch (type) {
+            case "Tesla":
+                return new Tesla();
+            case "Toyota":
+                return new Toyota();
+            default:
+                throw new Error("Unknown car type");
+        }
+    }
+}
+
+// Step 4: Use the factory
+const myCar: Car = CarFactory.createCar("Tesla");
+myCar.drive(); // Output: Driving a Tesla!
+2. Finding the Right Objects (Encapsulation)
+Example: Shopping Cart System
+Java:
+
+java
+Copy code
+class Cart {
+    private List<String> items = new ArrayList<>();
+
+    public void addItem(String item) {
+        items.add(item);
+        System.out.println(item + " added to cart.");
+    }
+
+    public void viewCart() {
+        System.out.println("Cart Items: " + items);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Cart cart = new Cart();
+        cart.addItem("Apple");
+        cart.addItem("Banana");
+        cart.viewCart(); // Output: Cart Items: [Apple, Banana]
+    }
+}
+TypeScript:
+
+typescript
+Copy code
+class Cart {
+    private items: string[] = [];
+
+    addItem(item: string): void {
+        this.items.push(item);
+        console.log(`${item} added to cart.`);
+    }
+
+    viewCart(): void {
+        console.log("Cart Items:", this.items);
+    }
+}
+
+const cart = new Cart();
+cart.addItem("Apple");
+cart.addItem("Banana");
+cart.viewCart(); // Output: Cart Items: [ 'Apple', 'Banana' ]
+3. Class vs. Interface
+Example: Payment System
+Java:
+
+java
+Copy code
+interface Payment {
+    void processPayment();
+}
+
+class CreditCardPayment implements Payment {
+    public void processPayment() {
+        System.out.println("Processing credit card payment");
+    }
+}
+
+class PayPalPayment implements Payment {
+    public void processPayment() {
+        System.out.println("Processing PayPal payment");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Payment payment = new CreditCardPayment();
+        payment.processPayment(); // Output: Processing credit card payment
+    }
+}
+TypeScript:
+
+typescript
+Copy code
+interface Payment {
+    processPayment(): void;
+}
+
+class CreditCardPayment implements Payment {
+    processPayment() {
+        console.log("Processing credit card payment");
+    }
+}
+
+class PayPalPayment implements Payment {
+    processPayment() {
+        console.log("Processing PayPal payment");
+    }
+}
+
+const payment: Payment = new CreditCardPayment();
+payment.processPayment(); // Output: Processing credit card payment
+4. Class vs. Interface Inheritance
+Example: Animal Hierarchy
+Java:
+
+java
+Copy code
+// Class Inheritance
+class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+// Interface Inheritance (Subtyping)
+interface Flyable {
+    void fly();
+}
+
+class Bird implements Flyable {
+    public void fly() {
+        System.out.println("Bird flies");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat(); // Output: Animal eats
+        dog.bark(); // Output: Dog barks
+
+        Flyable bird = new Bird();
+        bird.fly(); // Output: Bird flies
+    }
+}
+TypeScript:
+
+typescript
+Copy code
+// Class Inheritance
+class Animal {
+    eat() {
+        console.log("Animal eats");
+    }
+}
+
+class Dog extends Animal {
+    bark() {
+        console.log("Dog barks");
+    }
+}
+
+// Interface Inheritance (Subtyping)
+interface Flyable {
+    fly(): void;
+}
+
+class Bird implements Flyable {
+    fly() {
+        console.log("Bird flies");
+    }
+}
+
+const dog = new Dog();
+dog.eat(); // Output: Animal eats
+dog.bark(); // Output: Dog barks
+
+const bird: Flyable = new Bird();
+bird.fly(); // Output: Bird flies
+5. Programming to an Interface, Not an Implementation
+Example: Using Abstract Factory Pattern
+Java:
+
+java
+Copy code
+interface Button {
+    void render();
+}
+
+class WindowsButton implements Button {
+    public void render() {
+        System.out.println("Rendering Windows Button");
+    }
+}
+
+class MacOSButton implements Button {
+    public void render() {
+        System.out.println("Rendering MacOS Button");
+    }
+}
+
+abstract class ButtonFactory {
+    abstract Button createButton();
+}
+
+class WindowsFactory extends ButtonFactory {
+    Button createButton() {
+        return new WindowsButton();
+    }
+}
+
+class MacOSFactory extends ButtonFactory {
+    Button createButton() {
+        return new MacOSButton();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ButtonFactory factory = new WindowsFactory();
+        Button button = factory.createButton();
+        button.render(); // Output: Rendering Windows Button
+    }
+}
+TypeScript:
+
+typescript
+Copy code
+interface Button {
+    render(): void;
+}
+
+class WindowsButton implements Button {
+    render() {
+        console.log("Rendering Windows Button");
+    }
+}
+
+class MacOSButton implements Button {
+    render() {
+        console.log("Rendering MacOS Button");
+    }
+}
+
+abstract class ButtonFactory {
+    abstract createButton(): Button;
+}
+
+class WindowsFactory extends ButtonFactory {
+    createButton(): Button {
+        return new WindowsButton();
+    }
+}
+
+class MacOSFactory extends ButtonFactory {
+    createButton(): Button {
+        return new MacOSButton();
+    }
+}
+
+const factory: ButtonFactory = new WindowsFactory();
+const button: Button = factory.createButton();
+button.render(); // Output: Rendering Windows Button
+6. Mixin Classes
+Example: Adding Logging with Mixin
+Java (using interfaces since Java does not support multiple inheritance):
+
+java
+Copy code
+interface Logger {
+    default void log(String message) {
+        System.out.println("Log: " + message);
+    }
+}
+
+class Service implements Logger {
+    public void performAction() {
+        log("Action performed");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Service service = new Service();
+        service.performAction(); // Output: Log: Action performed
+    }
+}
+TypeScript:
+
+typescript
+Copy code
+class LoggerMixin {
+    log(message: string): void {
+        console.log("Log:", message);
+    }
+}
+
+class Service extends LoggerMixin {
+    performAction(): void {
+        this.log("Action performed");
+    }
+}
+
+const service = new Service();
+service.performAction(); // Output: Log: Action performed
